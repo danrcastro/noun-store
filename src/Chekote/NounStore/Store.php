@@ -1,6 +1,5 @@
 <?php namespace Chekote\NounStore;
 
-use Illuminate\Support\Arr;
 use InvalidArgumentException;
 
 class Store
@@ -59,13 +58,13 @@ class Store
             static function ($carry, $item) use (&$i) {
                 list($noun, $index) = $item;
 
-                $carry = data_get($carry, $noun);
+                $carry = Arr::get($carry, $noun);
 
                 try {
                     // Was a specific index requested?
                     if ($index !== null) {
                         // Yes, fetch the specific index
-                        return data_get($carry, $index);
+                        return Arr::get($carry, $index);
                     } else {
                         // No, return the noun itself, or the latest noun if this is the
                         // first component of the key, and the noun is a collection
